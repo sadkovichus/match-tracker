@@ -1,26 +1,26 @@
 'use client';
-
-import { ChildrenProps } from '@shared/types';
+import { forwardRef } from 'react';
 import styled from 'styled-components';
-
-type ContainerProps = {
-  align?: 'center' | 'left' | 'right';
-  direction?: 'vertical' | 'horizontal';
-};
+import { ContainerProps } from '../model/index.type';
 
 const StyledContainer = styled.div<ContainerProps>`
-  max-width: 1300px;
+  max-width: ${({ maxWidth }) => maxWidth || '1300px'};
   width: 100%;
   margin: 0 auto;
-	flex: 1;
+  flex: 1;
   display: flex;
-  flex-direction: ${(props) => props.direction || 'column'};
+  flex-direction: ${({ direction }) => direction || 'row'};
+  padding: 0 10px;
 `;
 
-export const Container = ({ children }: ChildrenProps<ContainerProps>) => {
-  return (
-    <StyledContainer>
-      {children} 
-    </StyledContainer>
-  );
-};
+export const Container = forwardRef<HTMLDivElement, ContainerProps>(
+  ({ children, maxWidth, direction, className }, ref) => {
+    return (
+      <StyledContainer ref={ref} maxWidth={maxWidth} direction={direction} className={className}>
+        {children}
+      </StyledContainer>
+    );
+  }
+);
+
+Container.displayName = 'Container';
