@@ -1,0 +1,38 @@
+name: Building
+run-name: ${{github.actor}} is building ${{github.event_name}} for ${{github.repository}}
+
+on:
+  push:
+    branches: dev
+  pull_request:
+    branches: main
+
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [21.x]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Starting Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{matrix.node-version}}
+
+      - name: Check if pnpm is installed
+        run: pnpm --version || npm install -g pnpm
+
+      - name: Cache pnpm modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+
+      - name: install modules
+        run: pnpm install
+
+      - name: build code
+        run: pnpm build

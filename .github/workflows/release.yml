@@ -1,0 +1,41 @@
+name: Release
+run-name: ${{github.actor}} is releasing ${{github.event_name}} for ${{github.repository}}
+
+on:
+  push:
+    branches: 
+      - dev
+  pull_request:
+    branches: 
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+  Install-Pnpm:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Check if pnpm is installed
+        run: pnpm --version || npm install -g pnpm
+
+      - name: Cache pnpm modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
