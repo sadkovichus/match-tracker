@@ -1,7 +1,7 @@
 import { JSX } from 'react'
 
 export type SvgIconProps = {
-	name: string
+	name: 'logo' | 'update'
 	width?: string | number
 	height?: string | number
 	className?: string
