@@ -5,6 +5,8 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
+		font-family: Inter;
   }
 
 	html {
@@ -16,11 +18,15 @@ const GlobalStyles = createGlobalStyle`
   body {
     background-color: ${(props) => props.theme.colors.background};
 		color: ${(props) => props.theme.colors.color};
-		flex: 1;
 		display: flex;
+		flex: 1;
 
-		font-family: Inter;
   }
+
+	button {
+		border: none;
+		cursor: pointer;
+	}
 `
 
 export default GlobalStyles
