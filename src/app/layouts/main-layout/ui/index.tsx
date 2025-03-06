@@ -1,6 +1,7 @@
 'use client';
 
 import { ChildrenProps } from '@shared/types';
+import { Header } from '@widgets/header'
 import styled from 'styled-components';
 
 const Layout = styled.div`
@@ -12,9 +13,8 @@ const Layout = styled.div`
 export const MainLayout = ({ children }: ChildrenProps) => {
   return (
     <Layout>
-      <header>HEader</header>
+      <Header />
       {children}
-      <footer>FOoter</footer>
     </Layout>
   );
 };
