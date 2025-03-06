@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
       ...config.resolve.alias,
       "@": path.resolve(__dirname, "./src"),
       "@app": path.resolve(__dirname, "./src/app"),
-      "@pages": path.resolve(__dirname, "./src/pages"),
+      "@_pages": path.resolve(__dirname, "./src/_pages"),
       "@widgets": path.resolve(__dirname, "./src/widgets"),
       "@features": path.resolve(__dirname, "./src/features"),
       "@entities": path.resolve(__dirname, "./src/entities"),

@@ -22,7 +22,7 @@
     "paths": {
       "@*": ["./*"],
       "@app": ["./app/*"],
-      "@pages": ["./pages/*"],
+      "@_pages": ["./_pages/*"],
       "@widgets": ["./widgets/*"],
       "@features": ["./features/*"],
       "@entities": ["./entities/*"],
