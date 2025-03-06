@@ -1,6 +1,8 @@
 import { App } from '@app/';
 import { Metadata } from 'next';
 
+const URL = process.env.WEBSITE_URL || 'http://localhost:3000';
+
 export const metadata: Metadata = {
   title: 'Match Tracker',
   description: 'See match results in our match tracker',
@@ -10,11 +12,11 @@ export const metadata: Metadata = {
     shortcut: '/favicon.png', // Shortcut иконка
   },
   openGraph: {
-    url: 'https://medium-voted-theory-friendship.trycloudflare.com',
+    url: URL,
     siteName: 'Match Tracker',
     images: [
       {
-        url: 'https://medium-voted-theory-friendship.trycloudflare.com/og-img.png', // Абсолютный путь
+        url: `${URL}/og-img.png`, // Абсолютный путь
         width: 1630,
         height: 1630,
         alt: 'Logo',
