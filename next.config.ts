@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
   devIndicators: false,
   reactStrictMode: true,
   compiler: {
-    styledComponents: true, // Включаем поддержку styled-components
+    styledComponents: true,
   },
   webpack: (config) => {
     config.resolve.alias = {
