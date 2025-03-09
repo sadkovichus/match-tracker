@@ -2,6 +2,7 @@ import type { NextConfig } from "next"
 import path from 'path'
 
 const nextConfig: NextConfig = {
+  devIndicators: false,
   reactStrictMode: true,
   compiler: {
     styledComponents: true, // Включаем поддержку styled-components
@@ -19,6 +20,20 @@ const nextConfig: NextConfig = {
     }
     return config
   },
+   async headers() {
+    return [
+      {
+        source: "/:all*(jpg|jpeg|png|gif|webp|avif|svg)",
+        locale: false,
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable"
+          }
+        ]
+      }
+    ]
+  }
 }
 
 export default nextConfig
