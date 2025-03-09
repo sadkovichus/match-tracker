@@ -1,4 +1,4 @@
 import { icons } from './const/index.const'
-import { SvgIconProps, SvgIconType } from './types/index.type'
+import { SvgIconProps } from './types/index.type'
 export { icons }
-export type { SvgIconProps, SvgIconType }
+export type { SvgIconProps }
