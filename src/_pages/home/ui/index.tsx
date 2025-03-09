@@ -1,9 +1,10 @@
-'use client'
-
-import { Container } from '@shared/ui/container'
+import { MatchList } from '@features/matches-list'
+import { ContainerStyle } from './styles'
 
 export const HomePage = () => {
-	return (
-		<Container><p>Hone PAge</p></Container>
-	)
+  return (
+    <ContainerStyle>
+			<MatchList />
+    </ContainerStyle>
+  );
 };
