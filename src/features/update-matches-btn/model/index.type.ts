@@ -1,6 +1,4 @@
-import { ChildrenProps } from '@shared/types'
-
-export type UpdateBtnProps = ChildrenProps<{
-	onClick?: () => void;
-	className?: string;
-}>;
+export type UpdateBtnProps = {
+	onClick?: () => void
+	className?: string
+}

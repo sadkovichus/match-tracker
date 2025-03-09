@@ -1,10 +1,9 @@
-import { JSX } from 'react'
+import { icons } from './../const/index.const'
 
 export type SvgIconProps = {
-	name: 'logo' | 'update'
-	width?: string | number
-	height?: string | number
+	name: keyof typeof icons
+	width?: number
+	height?: number
+	size?: number
 	className?: string
 }
-
-export type SvgIconType = Record<string, ({ }: Omit<SvgIconProps, 'name'>) => JSX.Element>

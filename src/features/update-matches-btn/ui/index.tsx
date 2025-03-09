@@ -1,26 +1,40 @@
-import { theme } from '@shared/const';
-import { forwardRef } from 'react';
-import styled from 'styled-components';
+'use client'
+
+import { MATCH_KEY } from '@shared/const';
+import { forwardRef, useState, useCallback } from 'react';
 import { UpdateBtnProps } from '../model/index.type';
+import { SvgIcon } from '@shared/ui';
+import { useQueryClient } from '@tanstack/react-query';
+import { ButtonStyle } from './styles';
 
-const ButtonStyled = styled.button`
-  background-color: ${theme.colors.buttonBackground};
-  color: ${theme.colors.buttonColor};
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  padding: 9px 30px;
-  border-radius: 4px;
+export const UpdateBtn = forwardRef<HTMLButtonElement, UpdateBtnProps>(({ className }, ref) => {
+  const queryClient = useQueryClient();
+  const [isUpdating, setIsUpdating] = useState(false);
 
-  font-weight: 500;
+  const handleUpdate = useCallback(async () => {
+    if (isUpdating) return;
 
-  &:hover {
-    background-color: ${theme.colors.buttonBackgroundHover};
-  }
-`;
+    setIsUpdating(true);
+    try {
+      await queryClient.invalidateQueries({ queryKey: [MATCH_KEY] });
+    } catch {
+      console.error('Error while updating');
+    } finally {
+      setIsUpdating(false);
+    }
+  }, [isUpdating, queryClient]);
 
-export const UpdateBtn = forwardRef<HTMLButtonElement, UpdateBtnProps>(({ children }, ref) => {
-  return <ButtonStyled ref={ref}>{children}</ButtonStyled>;
+  return (
+    <ButtonStyle
+      data-updating={isUpdating}
+      onClick={handleUpdate}
+      ref={ref}
+      className={className}
+      disabled={isUpdating}
+    >
+      Обновить <SvgIcon width={20} name={isUpdating ? 'updating' : 'update'} />
+    </ButtonStyle>
+  );
 });
 
 UpdateBtn.displayName = 'UpdateBtn';

@@ -1,33 +1,30 @@
+'use client';
+
 import { UpdateBtn } from '@features/update-matches-btn';
+import { fetchMatches } from '@shared/api';
+import { MATCH_KEY } from '@shared/const';
 import { SvgIcon } from '@shared/ui';
-import { Container } from '@shared/ui/container';
-import styled from 'styled-components';
-
-const HeaderStyle = styled.header`
-  display: flex;
-  width: 100%;
-  padding: 53px 0 30px 0;
-`;
-
-const ContentStyle = styled.div`
-  margin-left: auto;
-  display: flex;
-  gap: 10px;
-`;
-
-const ContainerStyle = styled(Container)`
-  align-items: center;
-`;
+import { useQuery } from '@tanstack/react-query';
+import { ContainerStyle, ContentStyle, ErrorStyle, HeaderStyle } from './styles';
 
 export const Header = () => {
+  const { error } = useQuery({
+    queryKey: [MATCH_KEY],
+    queryFn: fetchMatches,
+    enabled: false,
+  });
+
   return (
     <HeaderStyle>
       <ContainerStyle>
         <SvgIcon width={200} name='logo' />
         <ContentStyle>
-          <UpdateBtn>
-            Обновить <SvgIcon width={20} name='update' />
-          </UpdateBtn>
+          {error && (
+            <ErrorStyle>
+              <SvgIcon name='error' size={21} /> Ошибка: не удалось загрузить информацию
+            </ErrorStyle>
+          )}
+          <UpdateBtn />
         </ContentStyle>
       </ContainerStyle>
     </HeaderStyle>
