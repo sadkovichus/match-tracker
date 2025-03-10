@@ -5,7 +5,8 @@ import { fetchMatches } from '@shared/api';
 import { MATCH_KEY } from '@shared/const';
 import { SvgIcon } from '@shared/ui';
 import { useQuery } from '@tanstack/react-query';
-import { ContainerStyle, ContentStyle, ErrorStyle, HeaderStyle } from './styles';
+import { ContainerStyle, ContentStyle, HeaderStyle } from './styles';
+import { ErrorMessage } from './error-message';
 
 export const Header = () => {
   const { error } = useQuery({
@@ -19,11 +20,7 @@ export const Header = () => {
       <ContainerStyle>
         <SvgIcon width={200} name='logo' />
         <ContentStyle>
-          {error && (
-            <ErrorStyle>
-              <SvgIcon name='error' size={21} /> Ошибка: не удалось загрузить информацию
-            </ErrorStyle>
-          )}
+          {error && <ErrorMessage />}
           <UpdateBtn />
         </ContentStyle>
       </ContainerStyle>
