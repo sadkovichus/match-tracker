@@ -8,15 +8,16 @@ import { useQuery } from '@tanstack/react-query';
 import { GetServerSideProps } from 'next';
 import { ListStyle } from './styles';
 import { Loader } from '@widgets/loader';
+import { MatchesResponseType } from '@shared/types'
 
 export const MatchList = () => {
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError } = useQuery<MatchesResponseType>({
     queryKey: [MATCH_KEY],
     queryFn: fetchMatches,
   });
 
   if (isLoading) return <Loader />;
-  if (isError || data === undefined) return <p>Error</p>;
+  if (isError || data === undefined) return null;
   const list = data['data']['matches'];
 
   return (
